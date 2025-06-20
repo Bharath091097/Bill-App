@@ -98,6 +98,8 @@ function App() {
   ]);
 
   const [total, setTotal] = useState("150.00");
+  const [companyLogo, setCompanyLogo] = useState(null);
+  const fileInputRef = useRef(null);
 
   // Calculate total whenever items change
   useEffect(() => {
