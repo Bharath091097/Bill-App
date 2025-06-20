@@ -168,16 +168,16 @@ function App() {
             New Receipt
           </button>
           <button
-            onClick={printReceipt}
+            onClick={addItem}
             className="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
           >
-            Print Receipt
+            + Add Item
           </button>
           <button
-            onClick={addItem}
-            className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+            onClick={printReceipt}
+            className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
           >
-            + Add Item
+            Print Receipt
           </button>
         </div>
 
