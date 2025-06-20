@@ -1,49 +1,76 @@
-# Getting Started with Create React App
+# Bill/Receipt Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A professional, responsive bill and receipt generator built with React and Tailwind CSS.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+✨ **Fully Responsive** - Works on mobile, tablet, and desktop
+💰 **Indian Currency Support** - Built-in ₹ (Rupees) support
+🖼️ **Company Logo Upload** - Add your company logo
+📝 **Inline Editing** - Click any field to edit directly
+🧾 **Multiple Items** - Add unlimited products/services
+🧮 **Auto-calculation** - Total automatically calculated
+🖨️ **Print Ready** - Professional print formatting
 
-### `npm start`
+## Live Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[Add your Netlify URL here after deployment]
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Quick Start
 
-### `npm test`
+### For Netlify Deployment
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Download/Clone** this repository
+2. **Upload to Netlify**:
+   - Drag and drop the `frontend` folder to Netlify
+   - Or connect your GitHub repository
+3. **Build Settings**:
+   - Build command: `yarn build`
+   - Publish directory: `build`
+4. **Deploy** and enjoy!
 
-### `npm run build`
+### For Local Development
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Install dependencies
+yarn install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Start development server
+yarn start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Build for production
+yarn build
+```
 
-### `npm run eject`
+## How to Use
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Company Info**: Click to edit company name and address
+2. **Logo**: Use "Add Logo" button to upload company logo
+3. **Receipt Details**: Edit receipt number and date
+4. **Customer**: Add customer information
+5. **Items**: Add products/services with prices
+6. **Print**: Use browser print or "Print Receipt" button
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **React 19** - Latest React version
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
+- **File Reader API** - Logo upload functionality
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Browser Support
 
-## Learn More
+- ✅ Chrome, Firefox, Safari, Edge
+- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+- ✅ Print functionality across all browsers
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+MIT License - Feel free to use for personal and commercial projects.
+
+---
+
+**Built with ❤️ for small businesses and entrepreneurs**
 
 ### Code Splitting
 
