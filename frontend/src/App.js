@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 
 const EditableField = ({ value, onChange, placeholder, className = "", type = "text", isMultiline = false }) => {
@@ -62,6 +62,8 @@ const EditableField = ({ value, onChange, placeholder, className = "", type = "t
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         className={`${className} bg-transparent border-2 border-blue-300 rounded px-2 py-1 outline-none`}
+        step={type === "number" ? "0.01" : undefined}
+        min={type === "number" ? "0" : undefined}
       />
     );
   }
@@ -81,22 +83,57 @@ function App() {
   const [receiptData, setReceiptData] = useState({
     companyName: "Your Company Name",
     customerName: "Customer Name",
-    price: "100.00",
-    total: "100.00",
     receiptNumber: `#${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
-    date: new Date().toLocaleDateString('en-US', { 
+    date: new Date().toLocaleDateString('en-IN', { 
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
     }),
-    address: "123 Business Street\nCity, State 12345\nPhone: (555) 123-4567"
+    address: "123 Business Street\nCity, State 12345\nPhone: +91 98765 43210"
   });
+
+  const [items, setItems] = useState([
+    { id: 1, description: "Product/Service 1", price: "100.00" },
+    { id: 2, description: "Product/Service 2", price: "50.00" }
+  ]);
+
+  const [total, setTotal] = useState("150.00");
+
+  // Calculate total whenever items change
+  useEffect(() => {
+    const newTotal = items.reduce((sum, item) => {
+      const price = parseFloat(item.price) || 0;
+      return sum + price;
+    }, 0);
+    setTotal(newTotal.toFixed(2));
+  }, [items]);
 
   const updateField = (field, value) => {
     setReceiptData(prev => ({
       ...prev,
       [field]: value
     }));
+  };
+
+  const updateItem = (id, field, value) => {
+    setItems(prev => prev.map(item => 
+      item.id === id ? { ...item, [field]: value } : item
+    ));
+  };
+
+  const addItem = () => {
+    const newId = Math.max(...items.map(item => item.id)) + 1;
+    setItems(prev => [...prev, {
+      id: newId,
+      description: "New Product/Service",
+      price: "0.00"
+    }]);
+  };
+
+  const removeItem = (id) => {
+    if (items.length > 1) {
+      setItems(prev => prev.filter(item => item.id !== id));
+    }
   };
 
   const generateNewReceipt = () => {
