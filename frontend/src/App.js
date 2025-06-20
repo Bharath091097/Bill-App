@@ -140,7 +140,7 @@ function App() {
     setReceiptData(prev => ({
       ...prev,
       receiptNumber: `#${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
-      date: new Date().toLocaleDateString('en-US', { 
+      date: new Date().toLocaleDateString('en-IN', { 
         year: 'numeric', 
         month: 'long', 
         day: 'numeric' 
@@ -168,6 +168,12 @@ function App() {
             className="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
           >
             Print Receipt
+          </button>
+          <button
+            onClick={addItem}
+            className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+          >
+            + Add Item
           </button>
         </div>
 
@@ -218,53 +224,68 @@ function App() {
                 Items & Services
               </div>
               
-              <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                <div className="flex-1">
-                  <EditableField
-                    value="Service/Product"
-                    onChange={() => {}} // Keep static for now
-                    placeholder="Item description"
-                    className="font-medium text-gray-800"
-                  />
-                </div>
-                <div className="text-right">
-                  <div className="flex items-center">
-                    <span className="text-gray-600 mr-1">$</span>
+              {/* Item Headers */}
+              <div className="flex justify-between text-xs font-semibold text-gray-600 uppercase tracking-wide pb-1">
+                <div className="flex-1">Description</div>
+                <div className="w-20 text-right">Amount</div>
+                <div className="w-8"></div>
+              </div>
+
+              {/* Items List */}
+              {items.map((item) => (
+                <div key={item.id} className="flex justify-between items-center py-2 border-b border-gray-100 group">
+                  <div className="flex-1 pr-2">
                     <EditableField
-                      value={receiptData.price}
-                      onChange={(value) => {
-                        updateField('price', value);
-                        updateField('total', value); // Auto-update total for now
-                      }}
-                      placeholder="0.00"
-                      className="font-medium text-gray-800 text-right min-w-[60px]"
-                      type="number"
+                      value={item.description}
+                      onChange={(value) => updateItem(item.id, 'description', value)}
+                      placeholder="Item description"
+                      className="font-medium text-gray-800 w-full"
                     />
                   </div>
+                  <div className="w-20 text-right">
+                    <div className="flex items-center justify-end">
+                      <span className="text-gray-600 mr-1">₹</span>
+                      <EditableField
+                        value={item.price}
+                        onChange={(value) => updateItem(item.id, 'price', value)}
+                        placeholder="0.00"
+                        className="font-medium text-gray-800 text-right min-w-[60px]"
+                        type="number"
+                      />
+                    </div>
+                  </div>
+                  <div className="w-8 text-center">
+                    {items.length > 1 && (
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity duration-200 print:hidden"
+                        title="Remove item"
+                      >
+                        ×
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
 
             {/* Total Section */}
             <div className="border-t-2 border-gray-200 pt-4">
               <div className="flex justify-between items-center text-xl font-bold">
-                <span className="text-gray-800">Total:</span>
+                <span className="text-gray-800">Total Amount:</span>
                 <div className="flex items-center">
-                  <span className="text-gray-800 mr-1">$</span>
-                  <EditableField
-                    value={receiptData.total}
-                    onChange={(value) => updateField('total', value)}
-                    placeholder="0.00"
-                    className="text-gray-800 text-right min-w-[80px] font-bold"
-                    type="number"
-                  />
+                  <span className="text-gray-800 mr-1">₹</span>
+                  <span className="text-gray-800">{total}</span>
                 </div>
+              </div>
+              <div className="text-right text-sm text-gray-600 mt-1">
+                (Auto-calculated from {items.length} item{items.length !== 1 ? 's' : ''})
               </div>
             </div>
 
             {/* Footer */}
             <div className="text-center pt-4 border-t border-gray-200">
-              <p className="text-sm text-gray-600">Thank you for your business!</p>
+              <p className="text-sm text-gray-600">धन्यवाद! Thank you for your business!</p>
               <p className="text-xs text-gray-500 mt-1">Please keep this receipt for your records</p>
             </div>
           </div>
@@ -273,8 +294,14 @@ function App() {
         {/* Instructions */}
         <div className="mt-6 p-4 bg-blue-50 rounded-lg print:hidden">
           <p className="text-sm text-blue-800">
-            <span className="font-semibold">💡 Tip:</span> Click on any field to edit it inline. Press Enter to save or Escape to cancel.
+            <span className="font-semibold">💡 Tips:</span>
           </p>
+          <ul className="text-sm text-blue-700 mt-2 space-y-1">
+            <li>• Click on any field to edit inline</li>
+            <li>• Use "Add Item" to add more products/services</li>
+            <li>• Total amount is calculated automatically</li>
+            <li>• Hover over items to see remove option</li>
+          </ul>
         </div>
       </div>
     </div>
