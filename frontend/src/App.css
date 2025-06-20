@@ -82,8 +82,72 @@ input[type="number"] {
 
 /* Responsive design improvements */
 @media (max-width: 640px) {
-  .max-w-md {
+  .max-w-2xl {
     max-width: 100%;
-    margin: 0 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  /* Better mobile spacing */
+  .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 1rem;
+  }
+  
+  /* Mobile-optimized button grid */
+  .grid-cols-2 button {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Tablet optimizations */
+  .max-w-2xl {
+    max-width: 42rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* Desktop optimizations */
+  .max-w-2xl {
+    max-width: 48rem;
+  }
+}
+
+/* Logo upload enhancements */
+.group:hover .opacity-0 {
+  opacity: 1;
+}
+
+/* Touch-friendly mobile interactions */
+@media (max-width: 640px) {
+  .cursor-pointer {
+    min-height: 44px; /* Touch target size */
+    display: flex;
+    align-items: center;
+  }
+  
+  button {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  /* Better mobile form inputs */
+  input, textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+    min-height: 44px;
+  }
+}
+
+/* Ensure logo doesn't break layout */
+.company-logo-container {
+  max-width: 25%;
+  flex-shrink: 0;
+}
+
+/* Better print logo handling */
+@media print {
+  .company-logo-container img {
+    max-width: 80px;
+    max-height: 80px;
   }
 }
