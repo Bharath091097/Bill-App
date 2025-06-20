@@ -199,9 +199,25 @@ function App() {
 
             {/* Receipt Info */}
             <div className="flex justify-between items-center text-sm">
-              <div>
-                <div className="font-semibold text-gray-700">Receipt: {receiptData.receiptNumber}</div>
-                <div className="text-gray-600">Date: {receiptData.date}</div>
+              <div className="space-y-1">
+                <div className="flex items-center">
+                  <span className="font-semibold text-gray-700 mr-2">Receipt:</span>
+                  <EditableField
+                    value={receiptData.receiptNumber}
+                    onChange={(value) => updateField('receiptNumber', value)}
+                    placeholder="#0000"
+                    className="font-semibold text-gray-700"
+                  />
+                </div>
+                <div className="flex items-center">
+                  <span className="text-gray-600 mr-2">Date:</span>
+                  <EditableField
+                    value={receiptData.date}
+                    onChange={(value) => updateField('date', value)}
+                    placeholder="Click to edit date"
+                    className="text-gray-600"
+                  />
+                </div>
               </div>
             </div>
 
