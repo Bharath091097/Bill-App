@@ -181,48 +181,86 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4">
-      <div className="max-w-md mx-auto">
+    <div className="min-h-screen bg-gray-100 py-4 sm:py-8 px-2 sm:px-4">
+      <div className="max-w-2xl mx-auto">
         {/* Action Buttons */}
-        <div className="flex gap-3 mb-6 print:hidden">
+        <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-3 mb-6 print:hidden">
           <button
             onClick={generateNewReceipt}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-3 sm:px-4 rounded-lg transition-colors duration-200 text-sm sm:text-base"
           >
             New Receipt
           </button>
           <button
             onClick={addItem}
-            className="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+            className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-3 sm:px-4 rounded-lg transition-colors duration-200 text-sm sm:text-base"
           >
             + Add Item
           </button>
           <button
+            onClick={triggerLogoUpload}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-3 sm:px-4 rounded-lg transition-colors duration-200 text-sm sm:text-base"
+          >
+            📷 Add Logo
+          </button>
+          <button
             onClick={printReceipt}
-            className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+            className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-3 sm:px-4 rounded-lg transition-colors duration-200 text-sm sm:text-base"
           >
             Print Receipt
           </button>
         </div>
 
+        {/* Hidden file input for logo upload */}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleLogoUpload}
+          className="hidden"
+        />
+
         {/* Receipt */}
         <div className="bg-white shadow-lg rounded-lg overflow-hidden print:shadow-none print:rounded-none">
-          <div className="p-6 space-y-6">
-            {/* Header - Company Name */}
-            <div className="text-center border-b-2 border-gray-200 pb-4">
-              <EditableField
-                value={receiptData.companyName}
-                onChange={(value) => updateField('companyName', value)}
-                placeholder="Click to add company name"
-                className="text-2xl font-bold text-gray-800 text-center w-full"
-              />
-              <EditableField
-                value={receiptData.address}
-                onChange={(value) => updateField('address', value)}
-                placeholder="Click to add address"
-                className="text-sm text-gray-600 mt-2 text-center whitespace-pre-line"
-                isMultiline={true}
-              />
+          <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            {/* Header - Company Name with Logo */}
+            <div className="relative border-b-2 border-gray-200 pb-4">
+              {/* Company Logo - Top Right */}
+              {companyLogo && (
+                <div className="absolute top-0 right-0 print:right-0">
+                  <div className="relative group">
+                    <img 
+                      src={companyLogo} 
+                      alt="Company Logo" 
+                      className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain rounded-lg border border-gray-200"
+                    />
+                    <button
+                      onClick={removeLogo}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 print:hidden"
+                      title="Remove logo"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              )}
+              
+              {/* Company Info - Centered with logo space consideration */}
+              <div className={`text-center ${companyLogo ? 'pr-20 sm:pr-24 md:pr-28' : ''}`}>
+                <EditableField
+                  value={receiptData.companyName}
+                  onChange={(value) => updateField('companyName', value)}
+                  placeholder="Click to add company name"
+                  className="text-xl sm:text-2xl font-bold text-gray-800 text-center w-full"
+                />
+                <EditableField
+                  value={receiptData.address}
+                  onChange={(value) => updateField('address', value)}
+                  placeholder="Click to add address"
+                  className="text-xs sm:text-sm text-gray-600 mt-2 text-center whitespace-pre-line"
+                  isMultiline={true}
+                />
+              </div>
             </div>
 
             {/* Receipt Info */}
