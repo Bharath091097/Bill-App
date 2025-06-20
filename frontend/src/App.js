@@ -264,9 +264,9 @@ function App() {
             </div>
 
             {/* Receipt Info */}
-            <div className="flex justify-between items-center text-sm">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-sm space-y-2 sm:space-y-0">
               <div className="space-y-1">
-                <div className="flex items-center">
+                <div className="flex flex-col sm:flex-row sm:items-center">
                   <span className="font-semibold text-gray-700 mr-2">Receipt:</span>
                   <EditableField
                     value={receiptData.receiptNumber}
@@ -275,7 +275,7 @@ function App() {
                     className="font-semibold text-gray-700"
                   />
                 </div>
-                <div className="flex items-center">
+                <div className="flex flex-col sm:flex-row sm:items-center">
                   <span className="text-gray-600 mr-2">Date:</span>
                   <EditableField
                     value={receiptData.date}
@@ -296,27 +296,27 @@ function App() {
                 value={receiptData.customerName}
                 onChange={(value) => updateField('customerName', value)}
                 placeholder="Click to add customer name"
-                className="text-lg font-medium text-gray-800"
+                className="text-base sm:text-lg font-medium text-gray-800"
               />
             </div>
 
             {/* Items Section */}
             <div className="space-y-3">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
                 <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-2 flex-1">
                   Items & Services
                 </div>
                 <button
                   onClick={addItem}
-                  className="bg-green-500 hover:bg-green-600 text-white text-xs font-medium py-1 px-3 rounded-full transition-colors duration-200 print:hidden ml-4"
+                  className="bg-green-500 hover:bg-green-600 text-white text-xs font-medium py-1 px-3 rounded-full transition-colors duration-200 print:hidden sm:ml-4"
                   title="Add new item"
                 >
                   + Add Item
                 </button>
               </div>
               
-              {/* Item Headers */}
-              <div className="flex justify-between text-xs font-semibold text-gray-600 uppercase tracking-wide pb-1">
+              {/* Item Headers - Hidden on mobile for space */}
+              <div className="hidden sm:flex justify-between text-xs font-semibold text-gray-600 uppercase tracking-wide pb-1">
                 <div className="flex-1">Description</div>
                 <div className="w-20 text-right">Amount</div>
                 <div className="w-8"></div>
@@ -325,10 +325,10 @@ function App() {
               {/* Empty State when no items */}
               {items.length === 0 && (
                 <div className="text-center py-8 text-gray-500">
-                  <p className="mb-3">No items added yet</p>
+                  <p className="mb-3 text-sm sm:text-base">No items added yet</p>
                   <button
                     onClick={addItem}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 text-sm sm:text-base"
                   >
                     + Add Your First Item
                   </button>
@@ -337,39 +337,78 @@ function App() {
 
               {/* Items List */}
               {items.map((item, index) => (
-                <div key={item.id} className="flex justify-between items-center py-2 border-b border-gray-100 group">
-                  <div className="flex-1 pr-2">
-                    <EditableField
-                      value={item.description}
-                      onChange={(value) => updateItem(item.id, 'description', value)}
-                      placeholder="Item description"
-                      className="font-medium text-gray-800 w-full"
-                    />
-                  </div>
-                  <div className="w-20 text-right">
-                    <div className="flex items-center justify-end">
-                      <span className="text-gray-600 mr-1">₹</span>
-                      <EditableField
-                        value={item.price}
-                        onChange={(value) => updateItem(item.id, 'price', value)}
-                        placeholder="0.00"
-                        className="font-medium text-gray-800 text-right min-w-[60px]"
-                        type="number"
-                      />
-                    </div>
-                  </div>
-                  <div className="w-8 text-center">
-                    <div className="flex flex-col space-y-1">
+                <div key={item.id} className="border-b border-gray-100 group pb-3 sm:pb-2">
+                  {/* Mobile Layout */}
+                  <div className="sm:hidden space-y-2">
+                    <div className="flex justify-between items-start">
+                      <span className="text-xs text-gray-500">#{index + 1}</span>
                       {items.length > 1 && (
                         <button
                           onClick={() => removeItem(item.id)}
-                          className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity duration-200 print:hidden text-lg leading-none"
+                          className="text-red-500 hover:text-red-700 transition-colors duration-200 print:hidden text-lg leading-none"
                           title="Remove item"
                         >
                           ×
                         </button>
                       )}
-                      <span className="text-xs text-gray-400 print:hidden">#{index + 1}</span>
+                    </div>
+                    <div>
+                      <EditableField
+                        value={item.description}
+                        onChange={(value) => updateItem(item.id, 'description', value)}
+                        placeholder="Item description"
+                        className="font-medium text-gray-800 w-full text-sm"
+                      />
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="flex items-center">
+                        <span className="text-gray-600 mr-1">₹</span>
+                        <EditableField
+                          value={item.price}
+                          onChange={(value) => updateItem(item.id, 'price', value)}
+                          placeholder="0.00"
+                          className="font-medium text-gray-800 text-right min-w-[60px] text-sm"
+                          type="number"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Desktop/Tablet Layout */}
+                  <div className="hidden sm:flex justify-between items-center py-2">
+                    <div className="flex-1 pr-2">
+                      <EditableField
+                        value={item.description}
+                        onChange={(value) => updateItem(item.id, 'description', value)}
+                        placeholder="Item description"
+                        className="font-medium text-gray-800 w-full"
+                      />
+                    </div>
+                    <div className="w-20 text-right">
+                      <div className="flex items-center justify-end">
+                        <span className="text-gray-600 mr-1">₹</span>
+                        <EditableField
+                          value={item.price}
+                          onChange={(value) => updateItem(item.id, 'price', value)}
+                          placeholder="0.00"
+                          className="font-medium text-gray-800 text-right min-w-[60px]"
+                          type="number"
+                        />
+                      </div>
+                    </div>
+                    <div className="w-8 text-center">
+                      <div className="flex flex-col space-y-1">
+                        {items.length > 1 && (
+                          <button
+                            onClick={() => removeItem(item.id)}
+                            className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity duration-200 print:hidden text-lg leading-none"
+                            title="Remove item"
+                          >
+                            ×
+                          </button>
+                        )}
+                        <span className="text-xs text-gray-400 print:hidden">#{index + 1}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -378,14 +417,14 @@ function App() {
 
             {/* Total Section */}
             <div className="border-t-2 border-gray-200 pt-4">
-              <div className="flex justify-between items-center text-xl font-bold">
+              <div className="flex justify-between items-center text-lg sm:text-xl font-bold">
                 <span className="text-gray-800">Total Amount:</span>
                 <div className="flex items-center">
                   <span className="text-gray-800 mr-1">₹</span>
                   <span className="text-gray-800">{total}</span>
                 </div>
               </div>
-              <div className="text-right text-sm text-gray-600 mt-1">
+              <div className="text-right text-xs sm:text-sm text-gray-600 mt-1">
                 (Auto-calculated from {items.length} item{items.length !== 1 ? 's' : ''})
               </div>
             </div>
@@ -403,11 +442,12 @@ function App() {
           <p className="text-sm text-blue-800">
             <span className="font-semibold">💡 Tips:</span>
           </p>
-          <ul className="text-sm text-blue-700 mt-2 space-y-1">
+          <ul className="text-xs sm:text-sm text-blue-700 mt-2 space-y-1">
             <li>• Click on any field to edit inline</li>
             <li>• Use "Add Item" to add more products/services</li>
+            <li>• Upload company logo from camera/gallery (mobile) or files (desktop)</li>
             <li>• Total amount is calculated automatically</li>
-            <li>• Hover over items to see remove option</li>
+            <li>• Hover over items to see remove option (desktop)</li>
           </ul>
         </div>
       </div>
