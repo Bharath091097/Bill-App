@@ -236,8 +236,17 @@ function App() {
 
             {/* Items Section */}
             <div className="space-y-3">
-              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-2">
-                Items & Services
+              <div className="flex justify-between items-center">
+                <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-2 flex-1">
+                  Items & Services
+                </div>
+                <button
+                  onClick={addItem}
+                  className="bg-green-500 hover:bg-green-600 text-white text-xs font-medium py-1 px-3 rounded-full transition-colors duration-200 print:hidden ml-4"
+                  title="Add new item"
+                >
+                  + Add Item
+                </button>
               </div>
               
               {/* Item Headers */}
