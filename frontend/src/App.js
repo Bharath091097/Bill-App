@@ -142,6 +142,28 @@ function App() {
     setItems([]);
   };
 
+  const handleLogoUpload = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setCompanyLogo(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeLogo = () => {
+    setCompanyLogo(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const triggerLogoUpload = () => {
+    fileInputRef.current?.click();
+  };
+
   const generateNewReceipt = () => {
     setReceiptData(prev => ({
       ...prev,
