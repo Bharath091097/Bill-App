@@ -136,6 +136,10 @@ function App() {
     }
   };
 
+  const clearAllItems = () => {
+    setItems([]);
+  };
+
   const generateNewReceipt = () => {
     setReceiptData(prev => ({
       ...prev,
