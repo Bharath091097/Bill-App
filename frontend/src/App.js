@@ -293,15 +293,18 @@ function App() {
                     </div>
                   </div>
                   <div className="w-8 text-center">
-                    {items.length > 1 && (
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity duration-200 print:hidden"
-                        title="Remove item"
-                      >
-                        ×
-                      </button>
-                    )}
+                    <div className="flex flex-col space-y-1">
+                      {items.length > 1 && (
+                        <button
+                          onClick={() => removeItem(item.id)}
+                          className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity duration-200 print:hidden text-lg leading-none"
+                          title="Remove item"
+                        >
+                          ×
+                        </button>
+                      )}
+                      <span className="text-xs text-gray-400 print:hidden">#{index + 1}</span>
+                    </div>
                   </div>
                 </div>
               ))}
