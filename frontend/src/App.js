@@ -256,8 +256,21 @@ function App() {
                 <div className="w-8"></div>
               </div>
 
+              {/* Empty State when no items */}
+              {items.length === 0 && (
+                <div className="text-center py-8 text-gray-500">
+                  <p className="mb-3">No items added yet</p>
+                  <button
+                    onClick={addItem}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+                  >
+                    + Add Your First Item
+                  </button>
+                </div>
+              )}
+
               {/* Items List */}
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <div key={item.id} className="flex justify-between items-center py-2 border-b border-gray-100 group">
                   <div className="flex-1 pr-2">
                     <EditableField
