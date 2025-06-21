@@ -183,6 +183,12 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 py-4 sm:py-8 px-2 sm:px-4">
       <div className="max-w-2xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-6 print:hidden">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Bill/Receipt Generator</h1>
+          <p className="text-gray-600">Professional receipts for your business</p>
+        </div>
+
         {/* Action Buttons */}
         <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-3 mb-6 print:hidden">
           <button
@@ -445,14 +451,21 @@ function App() {
           <ul className="text-xs sm:text-sm text-blue-700 mt-2 space-y-1">
             <li>• Click on any field to edit inline</li>
             <li>• Use "Add Item" to add more products/services</li>
-            <li>• Upload company logo from camera/gallery (mobile) or files (desktop)</li>
+            <li>• Upload company logo from your local files</li>
             <li>• Total amount is calculated automatically</li>
-            <li>• Hover over items to see remove option (desktop)</li>
+            <li>• Use Ctrl+P to print receipts</li>
           </ul>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center mt-8 text-gray-500 text-sm print:hidden">
+          <p>Running locally on Ubuntu | Built with React & Tailwind CSS</p>
         </div>
       </div>
     </div>
   );
 }
+
+export default App;
 
 export default App;
