@@ -3,7 +3,7 @@
 
 # Install dependencies
 echo "Installing dependencies..."
-yarn install --frozen-lockfile
+yarn install
 
 # Build the application
 echo "Building application..."
