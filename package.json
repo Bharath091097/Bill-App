@@ -2,9 +2,13 @@
   "name": "bill-receipt-generator",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "18.x",
+    "yarn": "1.x"
+  },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
