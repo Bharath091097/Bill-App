@@ -138,10 +138,6 @@ function App() {
     }
   };
 
-  const clearAllItems = () => {
-    setItems([]);
-  };
-
   const handleLogoUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith('image/')) {
