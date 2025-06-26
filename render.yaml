@@ -1,0 +1,15 @@
+# Static site for Render
+# This file ensures Render treats this as a static site, not a Node.js app
+
+# Static site configuration
+type: static
+buildCommand: yarn build
+publishDir: build
+staticSiteDir: build
+
+# Environment variables
+envVars:
+  - key: NODE_ENV
+    value: production
+  - key: GENERATE_SOURCEMAP
+    value: false
